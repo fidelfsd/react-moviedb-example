@@ -14,7 +14,7 @@ movieService.getPopular = async () => {
          Authorization: `Bearer ${global.TOKEN}`,
       },
    };
-
+   await sleep(0); // TODO
    const response = await axios.request(options);
 
    return response.data;
@@ -35,4 +35,7 @@ movieService.getById = async (id) => {
 
    return response.data;
 };
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
 export default movieService;

@@ -1,5 +1,5 @@
 import "./App.scss";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import PopularMovies from "./pages/movie-list/PopularMovies";
 import About from "./pages/about/About";
@@ -14,7 +14,8 @@ function App() {
          <BrowserRouter>
             <Header />
             <Routes>
-               <Route path="/" element={<PopularMovies />} />
+               <Route path="/" element={<Navigate to="/popular" />} />
+               <Route path="/popular" element={<PopularMovies />} />
                <Route path="/now-playing" element={<NowPlayingMovies />} />
                <Route path="/movie/:id" element={<MovieDetail />} />
                <Route path="/about" element={<About />} />

@@ -1,11 +1,11 @@
 import React from "react";
 import "./Header.scss";
-import MainNavbar from "./navbar/MainNavbar";
+import ResponsiveAppBar from "./app-nav-bar/ResponsiveAppBar";
 
 export default function Header() {
    return (
       <div>
-         <MainNavbar />
+         <ResponsiveAppBar />
       </div>
    );
 }

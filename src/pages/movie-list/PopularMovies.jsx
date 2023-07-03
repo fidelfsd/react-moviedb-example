@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 
 import movieService from "../../_services/movieService";
 import MovieCard from "../../components/movie-card/MovieCard";
-import { Container, Row, Col } from "react-bootstrap";
+import { Box, Container, Typography } from "@mui/material";
 
 export default function PopularMovies() {
+   const initialMovies = [];
    // hooks
-   const [movies, setMovies] = useState([]);
+   const [movies, setMovies] = useState(initialMovies);
 
    useEffect(() => {
       getPopular();
@@ -24,20 +25,18 @@ export default function PopularMovies() {
    };
 
    return (
-      <div>
-         <Container>
-            <h1 className="text-center">Popular movies</h1>
+      <>
+         <Container sx={{ pt: 5, pb: 5 }}>
+            <Typography variant="h1" fontSize={40} align="center" gutterBottom>
+               Popular movies
+            </Typography>
 
-            {/* pagination */}
-
-            <Row className="row-cols-4">
+            <Box className="movie-list-wrapper">
                {movies.map((mov) => (
-                  <Col key={mov.id}>
-                     <MovieCard movie={mov} />
-                  </Col>
+                  <MovieCard key={mov.id} movie={mov} />
                ))}
-            </Row>
+            </Box>
          </Container>
-      </div>
+      </>
    );
 }
