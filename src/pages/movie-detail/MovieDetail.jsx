@@ -13,6 +13,7 @@ import format from "date-fns/format";
 
 import "./MovieDetail.scss";
 import VoteAverage from "../../components/vote-average/VoteAverage";
+import PageLoader from "../../components/loaders/PageLoader";
 
 export default function MovieDetail() {
    // hooks
@@ -162,7 +163,7 @@ export default function MovieDetail() {
                </section>
             </div>
          ) : (
-            <>Loading...</>
+            <PageLoader />
          )}
       </>
    );

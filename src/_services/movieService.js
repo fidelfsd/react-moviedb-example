@@ -4,11 +4,11 @@ import { global } from "../_config/global";
 
 const movieService = {};
 
-movieService.getPopular = async () => {
+movieService.getPopular = async (page = 1) => {
    const options = {
       method: "GET",
       url: `${global.BASE_API_URL}/movie/popular`,
-      params: { language: "en-US", page: "1" },
+      params: { language: "en-US", page },
       headers: {
          accept: "application/json",
          Authorization: `Bearer ${global.TOKEN}`,
@@ -20,11 +20,11 @@ movieService.getPopular = async () => {
    return response.data;
 };
 
-movieService.getNowPlaying = async () => {
+movieService.getNowPlaying = async (page = 1) => {
    const options = {
       method: "GET",
       url: `${global.BASE_API_URL}/movie/now_playing`,
-      params: { language: "en-US", page: "1" },
+      params: { language: "en-US", page },
       headers: {
          accept: "application/json",
          Authorization: `Bearer ${global.TOKEN}`,
