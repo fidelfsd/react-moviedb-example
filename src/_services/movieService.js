@@ -20,6 +20,22 @@ movieService.getPopular = async () => {
    return response.data;
 };
 
+movieService.getNowPlaying = async () => {
+   const options = {
+      method: "GET",
+      url: `${global.BASE_API_URL}/movie/now_playing`,
+      params: { language: "en-US", page: "1" },
+      headers: {
+         accept: "application/json",
+         Authorization: `Bearer ${global.TOKEN}`,
+      },
+   };
+   await sleep(0); // TODO
+   const response = await axios.request(options);
+
+   return response.data;
+};
+
 movieService.getById = async (id) => {
    const options = {
       method: "GET",
@@ -31,6 +47,7 @@ movieService.getById = async (id) => {
       },
    };
 
+   await sleep(2000); // TODO
    const response = await axios.request(options);
 
    return response.data;

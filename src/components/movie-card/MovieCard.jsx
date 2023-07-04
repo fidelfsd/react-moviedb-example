@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import { global } from "../../_config/global";
 import { useNavigate } from "react-router-dom";
 import { CardActionArea } from "@mui/material";
+import VoteAverage from "../vote-average/VoteAverage";
 
 export default function MovieCard({ movie }) {
    // hooks
@@ -18,15 +19,20 @@ export default function MovieCard({ movie }) {
    const handleClick = () => {
       navigate(`/movie/${movie.id}`);
    };
+
    return (
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 345 }} onClick={handleClick}>
          <CardActionArea>
             <CardMedia
                component="img"
                image={`${global.BASE_IMAGES_URL}/w185${movie.poster_path}`}
                alt="green iguana"
             />
-            <CardContent>
+            <CardContent sx={{ position: "relative", pt: 4 }}>
+               <VoteAverage
+                  value={movie.vote_average * 10}
+                  style={{ position: "absolute", top: "-25px" }}
+               />
                <Typography
                   gutterBottom
                   variant="h5"
