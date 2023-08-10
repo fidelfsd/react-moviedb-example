@@ -1,15 +1,13 @@
 .VoteAverage {
 
     .MuiBox-root {
-
         .MuiCircularProgress-root {
-            background-color: black;
+
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background-color: #000000;
             border-radius: 50%;
             padding: 0.15em;
         }
 
     }
-
-
-
 }

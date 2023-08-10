@@ -4,20 +4,29 @@ import { Box, Container, Typography } from "@mui/material";
 import movieService from "../../_services/movieService";
 import MovieCard from "../../components/movie-card/MovieCard";
 import PageLoader from "../../components/spinners/PageLoader";
-import Pagination from "@mui/material/Pagination";
+import Pagination from "../../components/pagination/Pagination";
+import { useSearchParams } from "react-router-dom";
 
-export default function NowPlayingMovies() {
+export default function PopularMovies() {
    // hooks
    const [movies, setMovies] = useState([]);
    const [isLoading, setIsLoading] = useState(true);
    const [page, setPage] = useState(1);
    const [count, setCount] = useState(0);
+   const [searchParams, setSearchParams] = useSearchParams();
+
+   console.log(searchParams.get("page"));
+   // update the url without causing a navigation/reload
+   // window.history.replaceState(null, "New Page Title", "/pathname/goes/here")
 
    useEffect(() => {
       getPopular();
+      console.log("page", page);
    }, [page]);
 
-   const handleChange = (event, value) => {
+   // hanldles
+   const handleOnChange = (event, value) => {
+      console.log("value", value);
       setPage(value);
    };
 
@@ -25,10 +34,10 @@ export default function NowPlayingMovies() {
    const getPopular = async () => {
       setIsLoading(true);
       try {
-         const data = await movieService.getNowPlaying(page);
+         const data = await movieService.getPopular(page);
          setMovies(data.results);
-         setCount(data.total_pages);
-         console.log(data.results);
+         setCount(500);
+         // console.log(data.results);
       } catch (error) {
          console.log(error);
       } finally {
@@ -46,22 +55,14 @@ export default function NowPlayingMovies() {
                   align="center"
                   gutterBottom
                >
-                  Now playing movies
+                  Popular movies
                </Typography>
 
-               <Box
-                  sx={{
-                     mt: 3,
-                     mb: 3,
-                     display: "flex",
-                     justifyContent: "center",
-                  }}
-               >
+               <Box sx={{ mt: 2, mb: 2 }}>
                   <Pagination
-                     sx={{ m: "auto" }}
-                     count={count}
                      page={page}
-                     onChange={handleChange}
+                     count={count}
+                     onChange={handleOnChange}
                   />
                </Box>
 
@@ -71,19 +72,11 @@ export default function NowPlayingMovies() {
                   ))}
                </div>
 
-               <Box
-                  sx={{
-                     mt: 3,
-                     mb: 3,
-                     display: "flex",
-                     justifyContent: "center",
-                  }}
-               >
+               <Box sx={{ mt: 2, mb: 2 }}>
                   <Pagination
-                     sx={{ m: "auto" }}
-                     count={count}
                      page={page}
-                     onChange={handleChange}
+                     count={count}
+                     onChange={handleOnChange}
                   />
                </Box>
             </Container>

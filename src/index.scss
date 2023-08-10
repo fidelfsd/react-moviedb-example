@@ -1,19 +1,38 @@
-:root {}
+//:root {}
+
+$breakpoints: (
+   sm: 600px,
+   md: 900px,
+   lg: 1200px,
+   xl: 1536px,
+);
 
 body {
-    margin: 0;
-    padding: 0;
-}
-
-.movie-list-wrapper {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 2em
+   margin: 0;
+   padding: 0;
 }
 
 img {
-    max-width: 100%;
-    height: auto;
-    padding: 0;
-    margin: 0;
+   max-width: 100%;
+   height: auto;
+   padding: 0;
+   margin: 0;
+}
+
+.movie-list-wrapper {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   gap: 2.5em;
+}
+
+@media (min-width: map-get($breakpoints, sm)) {
+   .movie-list-wrapper {
+      grid-template-columns: repeat(3, 1fr);
+   }
+}
+
+@media (min-width: map-get($breakpoints, md)) {
+   .movie-list-wrapper {
+      grid-template-columns: repeat(5, 1fr);
+   }
 }

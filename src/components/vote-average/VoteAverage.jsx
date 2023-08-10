@@ -1,41 +1,40 @@
-import React, { useEffect } from "react";
-
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import "./VoteAverage.scss";
 
-export default function VoteAverage({ value, style, size = 40 }) {
-   const [progress, setProgress] = React.useState(0);
+export default function VoteAverage({ value, style, size }) {
+   // hooks
+   const [progress, setProgress] = useState(0);
 
    useEffect(() => {
       const timer = setInterval(() => {
          setProgress((prevProgress) =>
             prevProgress >= value ? value : prevProgress + 10
          );
-      }, 200);
+      }, 100);
       return () => {
          clearInterval(timer);
       };
    }, []);
 
-   // functions
    const colorFromValue = (value) => {
       if (value >= 70) return "success";
       if (value >= 50) return "warning";
       return "error";
    };
 
-   const color = colorFromValue(value);
+   let color = colorFromValue(value);
 
    return (
       <div className="VoteAverage" style={style}>
          <Box sx={{ position: "relative", display: "inline-flex" }}>
             <CircularProgress
                variant="determinate"
-               value={progress}
                color={color}
+               value={progress}
                size={size}
             />
             <Box
@@ -61,12 +60,12 @@ export default function VoteAverage({ value, style, size = 40 }) {
                      justifyContent: "center",
                   }}
                >
-                  {`${Math.round(progress)}`}
+                  {Math.round(progress)}
                   <Typography
                      variant="caption"
                      component="span"
                      color="white"
-                     fontSize={11}
+                     fontSize={13}
                   >
                      %
                   </Typography>
@@ -76,3 +75,14 @@ export default function VoteAverage({ value, style, size = 40 }) {
       </div>
    );
 }
+
+VoteAverage.propTypes = {
+   /**
+    * The value of the progress indicator for the determinate variant.
+    * Value between 0 and 100.
+    * @default 0
+    */
+   value: PropTypes.number.isRequired,
+   size: PropTypes.number,
+   style: PropTypes.object,
+};

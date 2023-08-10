@@ -7,13 +7,16 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
+import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
+import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
-import MovieCreationTwoToneIcon from "@mui/icons-material/MovieCreationTwoTone";
+import MovieOutlinedIcon from "@mui/icons-material/MovieOutlined";
 
 import { NavLink } from "react-router-dom";
 import "./ResponsiveAppBar.scss";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import SearchInput from "../../search-input/SearchInput";
 
 const pages = [
    { title: "Popular", path: "/popular" },
@@ -28,15 +31,16 @@ function ResponsiveAppBar() {
       setAnchorElNav(event.currentTarget);
    };
 
-   const handleCloseNavMenu = () => {
+   const handleCloseNavMenu = (event) => {
       setAnchorElNav(null);
+      console.log(event.currentTarget.innerText);
    };
 
    return (
       <AppBar position="static" className="ResponsiveAppBar">
          <Container>
             <Toolbar disableGutters>
-               <MovieCreationTwoToneIcon
+               <MovieOutlinedIcon
                   sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
                />
                <Typography
@@ -88,9 +92,9 @@ function ResponsiveAppBar() {
                   >
                      {pages.map((page) => (
                         <NavLink
-                           key={page.title}
-                           to={page.path}
                            style={{ textDecoration: "none" }}
+                           to={page.path}
+                           key={page.title}
                         >
                            <MenuItem onClick={handleCloseNavMenu}>
                               <Typography textAlign="center">
@@ -101,7 +105,7 @@ function ResponsiveAppBar() {
                      ))}
                   </Menu>
                </Box>
-               <MovieCreationTwoToneIcon
+               <MovieOutlinedIcon
                   sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
                />
                <Typography
@@ -125,9 +129,9 @@ function ResponsiveAppBar() {
                <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
                   {pages.map((page) => (
                      <NavLink
-                        key={page.title}
-                        to={page.path}
                         style={{ textDecoration: "none" }}
+                        to={page.path}
+                        key={page.title}
                      >
                         <Button
                            onClick={handleCloseNavMenu}
@@ -138,6 +142,8 @@ function ResponsiveAppBar() {
                      </NavLink>
                   ))}
                </Box>
+
+               <SearchInput />
             </Toolbar>
          </Container>
       </AppBar>

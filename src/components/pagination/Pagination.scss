@@ -1,0 +1,39 @@
+.Pagination {
+   .pagination-buttons {
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      justify-content: center;
+
+      button {
+         border-radius: 50%;
+         width: 30px;
+         height: 30px;
+         padding: 0;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         background-color: transparent;
+         border: none;
+         font-size: 1em;
+         cursor: default;
+
+         &:not(:disabled):hover,
+         &.active {
+            background-color: #eeeeee;
+            cursor: pointer;
+         }
+
+         &:disabled {
+            .nav-icon {
+               fill: #dcdbdb;
+            }
+         }
+
+         .nav-icon {
+            width: 1.8em;
+            fill: #8d8d8d;
+         }
+      }
+   }
+}
